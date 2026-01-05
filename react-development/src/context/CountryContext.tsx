@@ -1,6 +1,7 @@
-import { createContext, useContext, ReactNode } from "react-router-dom";
+import { createContext, useContext, type ReactNode } from "react";
 import type { Country } from "../types/Country";
-
+import useFetch from "../hooks/useFetch";
+import {BASE_URL, ENDPOINTS} from "../utils/api";
 
 
 interface CountryContextType {
@@ -10,17 +11,24 @@ interface CountryContextType {
 }
 const CountryContext = createContext<CountryContextType | undefined>(undefined);
 
-export const CountryProvider = ({Children}: CountryProviderProps) => {
-    const {data, loading} = useFetch(url);
+interface CountryProviderProps {
+    children: ReactNode;
+}
+
+export const CountryProvider = ({ children }: CountryProviderProps) => {
+    const url = `${BASE_URL}${ENDPOINTS.ALL}`;
+
+    const { data, loading, error } = useFetch(url);
 
     const value = {
         countries: data || [],
         loading: loading,
+        error: error,
     };
 
     return(
         <CountryContext.Provider value={value}>
-            {Children}
+            {children}
         </CountryContext.Provider>
     );
 }; 
