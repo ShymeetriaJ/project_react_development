@@ -1,5 +1,3 @@
-import {} from 'react';
-
 interface SearchBarProps {
     searchTerm: string;
     onSearchChange: (term: string) => void;
@@ -14,8 +12,10 @@ export const SearchBar = ({ searchTerm, onSearchChange }: SearchBarProps) => {
     return (
         <input 
         type="text"
-
+        value={searchTerm}
+        onChange={handleChange}
+        placeholder='Search for a country...'
         />
     );
-}
+};
 

@@ -18,7 +18,7 @@ export const Home = () => {
         setSelectedRegion
     } = useCountryContext();
 
-    const filterCountries = countries.filter(country => {
+    const filteredCountries = countries.filter(country => {
 
         const matchesSearch = country.name.common.toLowerCase().includes(searchTerm.toLowerCase());
         const matchesRegion = !selectedRegion || country.region === selectedRegion;
@@ -50,7 +50,7 @@ export const Home = () => {
     <div className='controls-container'>
 
         <SearchBar
-            searchTerm='{searchTerm}'
+            searchTerm={searchTerm}
             onSearchChange={setSearchTerm}
         />
 
@@ -61,7 +61,7 @@ export const Home = () => {
     </div>
 
         <div className='countries-grid'>
-            {filterCountries.map(country => (
+            {filteredCountries.map(country => (
                 <CountryCard
                 key={country.name.common}
                 country={country}

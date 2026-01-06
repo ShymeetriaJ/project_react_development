@@ -1,4 +1,4 @@
-import { createContext, useContext, type ReactNode } from "react";
+import { createContext, useContext, useState, type ReactNode } from "react";
 import type { Country } from "../types/Country";
 import useFetch from "../hooks/useFetch";
 import useLocalStorage from "../hooks/useLocalStorage";
@@ -29,10 +29,18 @@ export const CountryProvider = ({ children }: CountryProviderProps) => {
 
     const [theme, setTheme] = useLocalStorage<string>('theme', 'light');
 
+    const [searchTerm, setSearchTerm] = useState<string>('');
+    const [selectedRegion, setSelectedRegion] = useState<string>('');
+
     const value = {
         countries: data || [],
         loading: loading,
         error: error,
+        theme: theme,
+        setTheme: setTheme,
+        searchTerm: searchTerm,
+        selectedRegion: selectedRegion,
+        setSelectedRegion: setSelectedRegion
     };
 
     return(
