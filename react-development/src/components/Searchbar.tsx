@@ -7,6 +7,7 @@ interface SearchBarProps {
 
 export const SearchBar = ({ searchTerm, onSearchChange }: SearchBarProps) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        console.log('user input:', e.target.value);
         onSearchChange(e.target.value);
     };
 
