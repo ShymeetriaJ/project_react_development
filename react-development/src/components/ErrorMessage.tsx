@@ -8,4 +8,4 @@ export const ErrorMessage = ({message}: ErrorMessageProps) => {
             <p className="error-message">{message}</p>
         </div>
     );
-},
+};
