@@ -45,6 +45,14 @@ export const CountryDetail = () => {
         .join(', ');
 
     const languages = Object.values(CountryDetail.languages || {}).join(', ');
+
+    const nativeNameObj = CountryDetail.name.nativeName;
+    const nativeName = nativeNameObj ? Object.values(nativeNameObj)[0]?.common : country.name.common;
+
+
+    const handleBorderClick = (borderCode: string) => {
+        Navigate(`/country/${borderCode}`);
+    };
     
     return (
         <>
