@@ -8,7 +8,23 @@ import { ErrorMessage } from '../components/ErrorMessage';
 
 
 export const Home = () => {
+    const {
+        countries,
+        loading,
+        error,
+        searchTerm,
+        setSearchTerm,
+        selectedRegion,
+        setSelectedRegion
+    } = useCountryContext();
 
+    const filterCountries = countries.filter(country => {
+
+        const matchesSearch = country.name.commom.toLowerCase().includes(searchTerm.toLowerCase());
+        const matchesRegion = !selectedRegion || country.region === selectedRegion;
+
+        return matchesSearch && matchesRegion;
+    });
 
     return (
     <>
