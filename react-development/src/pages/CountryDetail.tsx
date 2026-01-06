@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useCountryContext } from '../context/CountryContext';
 import { Navbar } from '../components/Navbar';
 import { Spinner } from '../components/Spinner';
@@ -7,10 +7,13 @@ import { ErrorMessage } from '../components/ErrorMessage';
 export const CountryDetail = () => {
    
     const { code } = useParams<{ code: string }>();
+    console.log('Country code from url:', code);
     
     const { countries, loading, error } = useCountryContext();
+    console.log('loading data:', loading);
     
     const country = countries.find(c => c.cca3 === code);
+    console.log('country found:', country);
     
     if (loading) {
         return (
@@ -37,8 +40,11 @@ export const CountryDetail = () => {
             </>
         );
     }
-    const currencies = 
-    const languages = 
+    const currencies = Object.values(country.currencies || {})
+        .map(curr => curr.name);
+        .join(', ');
+
+    const languages = Object.values(CountryDetail.languages || {}).join(', ');
     
     return (
         <>
