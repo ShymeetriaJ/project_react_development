@@ -9,6 +9,12 @@ interface CountryContextType {
     countries: Country[];
     loading: boolean;
     error: string | null;
+    theme: string;
+    setTheme: (theme: string) => void;
+    searchTerm: string;
+    setSearchTerm: (term: string) => void;
+    selectedRegion: string;
+    setSelectedRegion: (region: string) => void;
 }
 const CountryContext = createContext<CountryContextType | undefined>(undefined);
 
@@ -20,6 +26,8 @@ export const CountryProvider = ({ children }: CountryProviderProps) => {
     const url = `${BASE_URL}${ENDPOINTS.ALL}`;
 
     const { data, loading, error } = useFetch(url);
+
+    const [theme, setTheme] = useLocalStorage<string>('theme', 'light');
 
     const value = {
         countries: data || [],
