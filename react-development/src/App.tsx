@@ -5,14 +5,14 @@ import { CountryDetail } from './pages/CountryDetail';
 
 function App() {
   return (
-    <CountryProvider>
-      <BrowserRouter>
+    <BrowserRouter>
+      <CountryProvider>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/country/:code" element={<CountryDetail />} />
         </Routes>
-      </BrowserRouter>
-    </CountryProvider>
+      </CountryProvider>
+    </BrowserRouter>
   );
 }
 

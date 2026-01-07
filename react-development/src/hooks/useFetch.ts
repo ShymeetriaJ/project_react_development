@@ -10,20 +10,16 @@ const useFetch = (url: string) => {
         const fetchData = async () => {
             try {
                 const response = await fetch(url);
-                console.log('Fetching data from:', response);
               
                 if (!response.ok) {
                     throw new Error(`Fetch error! status: ${response.status}`);
                 }
 
                 const result = await response.json();
-                console.log('Data:', result);
-
                 setData(result);
                 setLoading(false);
 
             } catch (err) {
-                console.log('fetch failed:', err);
                 if (err instanceof Error) {
                     setError(err.message);
                 } else {

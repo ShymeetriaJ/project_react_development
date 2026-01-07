@@ -13,7 +13,7 @@ export const CountryCard = ({ country }: CountryCardProps) => {
     };
 
     return (
-        <div onClick={handleClick}>
+        <div onClick={handleClick} style= {{cursor: 'pointer'}}>
             <img 
                 src={country.flags.png} 
                 alt={`Flag of ${country.name.common}`} 

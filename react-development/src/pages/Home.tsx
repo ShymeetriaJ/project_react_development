@@ -1,11 +1,10 @@
 import { useCountryContext } from '../context/CountryContext';
 import { Navbar } from '../components/Navbar';
+import { SearchBar } from '../components/SearchBar';
 import { FilterDropdown } from '../components/FilterDropdown';
 import { CountryCard } from '../components/CountryCard';
 import { Spinner } from '../components/Spinner';
 import { ErrorMessage } from '../components/ErrorMessage';
-import { SearchBar } from '../components/Searchbar';
-
 
 export const Home = () => {
     const {
@@ -22,30 +21,33 @@ export const Home = () => {
 
         const matchesSearch = country.name.common.toLowerCase().includes(searchTerm.toLowerCase());
         const matchesRegion = !selectedRegion || country.region === selectedRegion;
-
         return matchesSearch && matchesRegion;
     });
-// while loading
+
     if (loading) {
         return (
             <>
-            <Navbar />
-            <Spinner />
+                <Navbar />
+                <main role="main" aria-live="polite" aria-busy="true">
+                    <Spinner />
+                </main>
             </>
         );
     }
-// loading error
     if (error) {
         return (
             <>
-            <Navbar />
-            <ErrorMessage message={error} />
+                <Navbar />
+                <main role="main" aria-live="assertive">
+                     <ErrorMessage message={error} />
+                </main>
+               
             </>
         );
     }
 
     return (
-    <>
+    <>  
     <Navbar />
     <div className='controls-container'>
 

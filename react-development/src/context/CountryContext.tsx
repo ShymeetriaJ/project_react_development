@@ -2,7 +2,7 @@ import { createContext, useContext, useState, type ReactNode } from "react";
 import type { Country } from "../types/Country";
 import useFetch from "../hooks/useFetch";
 import useLocalStorage from "../hooks/useLocalStorage";
-import {BASE_URL, ENDPOINTS} from "../utils/api";
+import { BASE_URL, ENDPOINTS, FIELDS } from "../utils/api";
 
 
 interface CountryContextType {
@@ -23,7 +23,7 @@ interface CountryProviderProps {
 }
 
 export const CountryProvider = ({ children }: CountryProviderProps) => {
-    const url = `${BASE_URL}${ENDPOINTS.ALL}`;
+    const url = `${BASE_URL}${ENDPOINTS.ALL}?fields=${FIELDS}`;
 
     const { data, loading, error } = useFetch(url);
 
@@ -32,15 +32,17 @@ export const CountryProvider = ({ children }: CountryProviderProps) => {
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [selectedRegion, setSelectedRegion] = useState<string>('');
 
-    const value = {
+    const value: CountryContextType = {
         countries: data || [],
-        loading: loading,
-        error: error,
-        theme: theme,
-        setTheme: setTheme,
-        searchTerm: searchTerm,
-        selectedRegion: selectedRegion,
-        setSelectedRegion: setSelectedRegion
+        loading,
+        error,
+        theme,
+        setTheme,
+        searchTerm,
+        setSearchTerm,
+        selectedRegion,
+        setSelectedRegion,
+        
     };
 
     return(

@@ -76,23 +76,23 @@ export const CountryDetail = () => {
                         <h1>{country.name.common}</h1>
                         
                         <div className='info-section'>
-                            <p><strong>Native Name:</strong>{nativeName}</p>
-                            <p><strong>Population:</strong>{country.population.toLocaleString()}</p>
-                            <p><strong>Region:</strong>{country.region}</p> 
+                            <p><strong>Native Name: </strong>{nativeName}</p>
+                            <p><strong>Population: </strong>{country.population.toLocaleString()}</p>
+                            <p><strong>Region: </strong>{country.region}</p> 
                             {country.subregion && (
                                 <p><strong>Sub Region:</strong> {country.subregion}</p>
                                 )}
-                            <p><strong>Capital:</strong>{country.capital?.[0] || 'N/A'}'</p>
+                            <p><strong>Capital: </strong>{country.capital?.[0] || 'N/A'}</p>
                         </div>
                         <div className='info-section'>
-                            {country.tld && country.tld.length > 0 && (
-                                <p><strong>Top Level Domain:</strong>{country.tld.join(', ')}</p>
+                            {country.tld && country.tld .length > 0 && (
+                                <p><strong>Top Level Domain: </strong>{country.tld.join(', ')}</p>
                             )}
-                            <p><strong>Currencies:</strong>{currencies || 'N/A'}</p>
-                            <p><strong>Languages:</strong>{languages || 'N/A'}</p>
+                            <p><strong>Currencies: </strong>{currencies || 'N/A'}</p>
+                            <p><strong>Languages: </strong>{languages || 'N/A'}</p>
                         </div>
 
-                        {country .borders && country.borders.length > 0 && (
+                        {country.borders && country.borders.length > 0 && (
                             <div className='border-countries'>
                                 <strong>Border Countries:</strong>
                                 <div className='border-buttons'>
