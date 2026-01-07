@@ -1,12 +1,15 @@
 import type { Country } from "../types/Country";
+import { useNavigate } from "react-router-dom";
 
 interface CountryCardProps {
     country: Country;  
 }
 
 export const CountryCard = ({ country }: CountryCardProps) => {
+    const navigate = useNavigate();
+
     const handleClick = () => {
-        console.log('Clicked country:', country.name.common);
+        navigate(`/country/${country.cca3}`);
     };
 
     return (
