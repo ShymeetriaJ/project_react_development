@@ -85,7 +85,7 @@ export const CountryDetail = () => {
                             <p><strong>Capital: </strong>{country.capital?.[0] || 'N/A'}</p>
                         </div>
                         <div className='info-section'>
-                            {country.tld && country.tld .length > 0 && (
+                            {country.tld && country.tld.length > 0 && (
                                 <p><strong>Top Level Domain: </strong>{country.tld.join(', ')}</p>
                             )}
                             <p><strong>Currencies: </strong>{currencies || 'N/A'}</p>
