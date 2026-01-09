@@ -47,32 +47,56 @@ export const Home = () => {
     }
 
     return (
-    <>  
-    <Navbar />
-    <div className='controls-container'>
+        <> 
+        <Navbar />
+            <main id="main-content" role="main">
+                <section
+                    className='controls-container'
+                    aria-label='search and filter controls'
+                >
 
-        <SearchBar
-            searchTerm={searchTerm}
-            onSearchChange={setSearchTerm}
-        />
+                    <SearchBar
+                        searchTerm={searchTerm}
+                        onSearchChange={setSearchTerm}
+                    />
 
-        <FilterDropdown
-            selectedRegion={selectedRegion}
-            onRegionChange={setSelectedRegion}
-        />
-    </div>
+                    <FilterDropdown
+                        selectedRegion={selectedRegion}
+                        onRegionChange={setSelectedRegion}
+                    />
+                </section>
+    
+                <section
+                    className='countries-grid'
+                    aria-label='Countries list'
+                    role='list'
+                >
+                    {filteredCountries.length === 0 ? (
+                        <div role='status' aria-live="polite">
+                            <p>No countries found</p>
+                        </div>
+                    ) : (
 
-        <div className='countries-grid'>
-            {filteredCountries.map(country => (
-                <CountryCard
-                key={country.name.common}
-                country={country}
-                />
-            ))}
-        </div>
-
-    </>
-);
+                        filteredCountries.map(country => (
+                            <div key={country.name.common} role="listitem">
+                                <CountryCard country={country} />
+                            </div>
+                
+                        ))
+                    )}
+                </section> 
+        
+                <div
+                    role='status'
+                    aria-live='polite'
+                    aria-atomic="true"
+                    className='sr-only'
+                >
+                    Showing {filteredCountries.length} of {countries.length} countries
+                </div>
+            </main>
+       </>
+    );
 };
 
 

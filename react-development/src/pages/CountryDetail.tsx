@@ -3,25 +3,34 @@ import { useCountryContext } from '../context/CountryContext';
 import { Navbar } from '../components/Navbar';
 import { Spinner } from '../components/Spinner';
 import { ErrorMessage } from '../components/ErrorMessage';
+import { useEffect } from 'react';
 
 export const CountryDetail = () => {
    
     const { code } = useParams<{ code: string }>();
-    console.log('Country code from url:', code);
-
     const navigate = useNavigate()
     
     const { countries, loading, error } = useCountryContext();
-    console.log('loading data:', loading);
     
     const country = countries.find(c => c.cca3 === code);
-    console.log('country found:', country);
-    
+  
+    useEffect(() => {
+        if (country) {
+            document.title = `${country.name.common} - Where in the world?`;
+        }
+        return () => {
+            document.title = 'Where in the world?';
+        };
+    }, [country]);
+
     if (loading) {
         return (
             <>
                 <Navbar />
-                <Spinner />
+                <main role='main' aria-live='polite' aria-busy='true'>
+                    <Spinner />
+                </main>
+                
             </>
         );
     }
@@ -29,7 +38,10 @@ export const CountryDetail = () => {
         return (
             <>
                 <Navbar />
-                <ErrorMessage message={error} />
+                <main role='main' aria-live='assertive'>
+                    <ErrorMessage message={error} />
+                </main>
+                
             </>
         );
     }
@@ -38,7 +50,10 @@ export const CountryDetail = () => {
         return (
             <>
                 <Navbar />
-                <ErrorMessage message="Country not found" />
+                <main role='main' aria-live='assertive'>
+                    <ErrorMessage message="Country not found" />
+                </main>
+                
             </>
         );
     }
